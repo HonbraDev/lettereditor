@@ -1,3 +1,20 @@
+.quill {
+  @apply h-screen shadow flex flex-col rounded-lg;
+}
+
+.ql-snow .ql-editor {
+  @apply prose max-w-none;
+}
+
+.ql-container.ql-snow {
+  border: none !important;
+  @apply overflow-y-auto h-full;
+}
+
+.ql-toolbar.ql-snow {
+  border: none !important;
+}
+
 .ql-snow.ql-toolbar .ql-formats,
 .ql-snow .ql-toolbar .ql-formats {
   @apply space-x-1;
@@ -11,12 +28,4 @@
 .ql-snow.ql-toolbar button.ql-active,
 .ql-snow .ql-toolbar button.ql-active {
   @apply bg-blue-100;
-}
-
-.ql-snow .ql-editor {
-  @apply prose;
-}
-
-.ql-container.ql-snow {
-  @apply max-h-96 overflow-y-auto;
 }

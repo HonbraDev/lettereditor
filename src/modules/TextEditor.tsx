@@ -35,7 +35,10 @@ const TextEditor = () => {
         modules={{
           toolbar,
         }}
-        onChangeSelection={() => setFormat(quill.current?.editor?.getFormat())}
+        onChangeSelection={(selection, sources, editor) => {
+          setFormat(selection ? quill.current?.editor?.getFormat() : {});
+          console.log(selection, sources, editor);
+        }}
       />
       <div className="space-x-2">
         <input
