@@ -1,0 +1,32 @@
+{
+  "applicationId": "com.honbra.letter",
+  "port": 0,
+  "defaultMode": "window",
+  "enableHTTPServer": true,
+  "enableNativeAPI": true,
+  "url": "http://localhpst:3000/resources/",
+  "nativeBlockList": [],
+  "globalVariables": {
+    "TEST": "one"
+  },
+  "modes": {
+    "window": {
+      "title": "Letter",
+      "width": 800,
+      "height": 500,
+      "fullScreen": false,
+      "alwaysOnTop": false,
+      "icon": "/icons/appIcon.png",
+      "enableInspector": true,
+      "borderless": false,
+      "maximize": false
+    },
+    "browser": {},
+    "cloud": {}
+  },
+  "cli": {
+    "binaryName": "letter",
+    "resourcesPath": "/resources/",
+    "clientLibrary": "/resources/neutralino.js"
+  }
+}

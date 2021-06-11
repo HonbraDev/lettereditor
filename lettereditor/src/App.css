@@ -1,5 +1,5 @@
 .quill {
-  @apply h-screen shadow flex flex-col rounded-lg;
+  @apply h-full w-full flex flex-col rounded-lg;
 }
 
 .ql-snow .ql-editor {

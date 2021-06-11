@@ -2,6 +2,7 @@
   "name": "letter",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/resources/",
   "dependencies": {
     "@craco/craco": "^6.1.2",
     "@tailwindcss/typography": "^0.4.0",
@@ -21,9 +22,9 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "craco build",
+    "build": "craco build && rm -rf ../resources/* && mv build/* ../resources/",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "craco eject"
   },
   "eslintConfig": {
     "extends": [
@@ -46,7 +47,7 @@
   "devDependencies": {
     "@types/quill": "^2.0.6",
     "autoprefixer": "^9",
-    "postcss": "^8.2.15",
+    "postcss": "^7",
     "postcss-nested": "^5.0.5",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   }
