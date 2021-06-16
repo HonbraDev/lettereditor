@@ -35,23 +35,26 @@ const DocumentSidebar: FC<{
       <Droppable droppableId="documents">
         {(provided) => (
           <ul
-            className="flex flex-col border-r border-gray-200 overflow-auto"
+            className="border-r border-gray-200 overflow-auto"
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
             {documents.map((doc, index) => (
-              <Draggable draggableId={doc + index.toString()} index={index}>
+              <Draggable
+                draggableId={doc + index.toString()}
+                index={index}
+                key={index}
+              >
                 {(provided) => (
                   <li
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
-                    className={`px-3 py-2 cursor-pointer overflow-ellipsis overflow-hidden whitespace-nowrap w-56 text-sm flex-1 ${
+                    className={`px-3 py-2 cursor-pointer overflow-ellipsis overflow-hidden whitespace-nowrap w-56 text-sm h-auto ${
                       index === currentDocument
                         ? "bg-gray-100 hover:bg-gray-200"
                         : "bg-white hover:bg-gray-100"
                     }`}
-                    key={index}
                     onClick={() => setCurrentDocument(index)}
                   >
                     {doc.title}
@@ -74,7 +77,7 @@ const DocumentSidebar: FC<{
               }}
             >
               <input
-                className="px-3 py-2 text-sm w-full"
+                className="px-3 py-2 text-sm w-full h-auto"
                 placeholder="New document"
                 type="text"
                 value={newDocument}
