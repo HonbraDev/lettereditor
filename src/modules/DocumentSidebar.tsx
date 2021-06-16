@@ -35,7 +35,7 @@ const DocumentSidebar: FC<{
       <Droppable droppableId="documents">
         {(provided) => (
           <ul
-            className="border-r border-gray-200 overflow-auto"
+            className="border-r border-gray-200 overflow-auto w-64"
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
@@ -50,7 +50,7 @@ const DocumentSidebar: FC<{
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
-                    className={`px-3 py-2 cursor-pointer overflow-ellipsis overflow-hidden whitespace-nowrap w-56 text-sm h-auto ${
+                    className={`px-3 py-2 cursor-pointer overflow-ellipsis overflow-hidden whitespace-nowrap text-sm h-auto w-full ${
                       index === currentDocument
                         ? "bg-gray-100 hover:bg-gray-200"
                         : "bg-white hover:bg-gray-100"
