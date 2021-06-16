@@ -9,10 +9,10 @@
 .storage
 *.log
 
-/lettereditor/node_modules
-/lettereditor/.pnp
-/lettereditor/coverage
-/lettereditor/build
+node_modules
+.pnp
+coverage
+build
 
 .pnp.js
 .DS_Store

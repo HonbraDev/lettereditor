@@ -1,12 +1,13 @@
-import { DeltaOperation } from "quill";
 import { useState } from "react";
+import { DeltaOperation } from "quill";
 import "./App.css";
 import TextEditor from "./modules/TextEditor";
+import { LetterDocument } from "./types/Types";
+import DocumentSidebar from "./modules/DocumentSidebar";
 
 const App = () => {
-  const [documents, setDocuments] = useState<
-    { title: string; value: DeltaOperation[] }[]
-  >([
+  const [currentDocument, setCurrentDocument] = useState(0);
+  const [documents, setDocuments] = useState<LetterDocument>([
     {
       title: "Hello",
       value: [
@@ -26,7 +27,6 @@ const App = () => {
       value: [{ insert: "How are you" }],
     },
   ]);
-  const [currentDocument, setCurrentDocument] = useState(0);
 
   const onChange = (newValue: DeltaOperation[]) => {
     const documentsCopy = [...documents];
@@ -35,27 +35,22 @@ const App = () => {
   };
 
   return (
-    <div className="App absolute top-0 left-0 h-full w-full flex flex-row">
-      <ul className="flex flex-col border-r border-gray-200 ">
-        {documents.map((doc, index) => (
-          <li
-            className={`px-3 py-2 cursor-pointer overflow-ellipsis overflow-hidden whitespace-nowrap w-56 text-sm ${
-              index === currentDocument
-                ? "bg-gray-100 hover:bg-gray-200"
-                : "hover:bg-gray-100"
-            }`}
-            key={index}
-            onClick={() => setCurrentDocument(index)}
-          >
-            {doc.title}
-          </li>
-        ))}
-        <input type="text" />
-      </ul>
-      <TextEditor
-        value={documents[currentDocument].value}
-        onChange={onChange}
-      />
+    <div className="App absolute top-0 left-0 h-full w-full flex flex-col">
+      <div className="p-3 border-b border-gray-200">
+        <h1 className="text-lg font-bold">Letter</h1>
+      </div>
+      <div className="w-full h-full flex">
+        <DocumentSidebar
+          documents={documents}
+          setDocuments={setDocuments}
+          currentDocument={currentDocument}
+          setCurrentDocument={setCurrentDocument}
+        />
+        <TextEditor
+          value={documents[currentDocument].value}
+          onChange={onChange}
+        />
+      </div>
     </div>
   );
 };

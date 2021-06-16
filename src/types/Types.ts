@@ -1,3 +1,5 @@
+import { DeltaOperation } from "quill";
+
 export interface Format {
   bold?: boolean;
   italic?: boolean;
@@ -13,3 +15,5 @@ export interface Format {
   indent?: number;
   align?: "left" | "center" | "right" | "justify";
 }
+
+export type LetterDocument = { title: string; value: DeltaOperation[] }[];

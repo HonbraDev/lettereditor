@@ -29,7 +29,8 @@ const TextEditor = ({
       <ReactQuill
         theme="snow"
         value={{ ops: value } as Value}
-        onChange={(_string, _delta, source) => {
+        onChange={(_string, delta, source) => {
+          console.log(source, delta);
           if (source === "api") return;
           onChange(
             quill.current?.editor?.getContents().ops as DeltaOperation[]

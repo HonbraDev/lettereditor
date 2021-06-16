@@ -2,7 +2,6 @@
   "name": "letter",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/resources/",
   "dependencies": {
     "@craco/craco": "^6.1.2",
     "@tailwindcss/typography": "^0.4.0",
@@ -14,6 +13,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "react": "^17.0.2",
+    "react-beautiful-dnd": "^13.1.0",
     "react-dom": "^17.0.2",
     "react-quill": "^2.0.0-beta.2",
     "react-scripts": "4.0.3",
@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "craco build && rm -rf ../resources/* && mv build/* ../resources/",
+    "build": "craco build",
     "test": "craco test",
     "eject": "craco eject"
   },
@@ -46,6 +46,7 @@
   },
   "devDependencies": {
     "@types/quill": "^2.0.6",
+    "@types/react-beautiful-dnd": "^13.0.0",
     "autoprefixer": "^9",
     "postcss": "^7",
     "postcss-nested": "^5.0.5",
