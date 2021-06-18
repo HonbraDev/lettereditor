@@ -50,14 +50,38 @@ const DocumentSidebar: FC<{
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
-                    className={`px-3 py-2 cursor-pointer overflow-ellipsis overflow-hidden whitespace-nowrap text-sm h-auto w-full ${
+                    className={`cursor-pointer overflow-ellipsis overflow-hidden whitespace-nowrap text-sm h-auto w-full ${
                       index === currentDocument
                         ? "bg-gray-100 hover:bg-gray-200"
                         : "bg-white hover:bg-gray-100"
                     }`}
-                    onClick={() => setCurrentDocument(index)}
+                    onClick={() => {
+                      if (currentDocument === index) {
+                        // idk
+                      } else {
+                        setCurrentDocument(index);
+                      }
+                    }}
                   >
-                    {doc.title}
+                    {currentDocument === index ? (
+                      <form>
+                        <input
+                          className="bg-transparent px-3 py-2"
+                          type="text"
+                          value={doc.title}
+                          onChange={(e) => {
+                            const documentsCopy = [...documents];
+                            documentsCopy[index] = {
+                              ...documentsCopy[index],
+                              title: e.target.value,
+                            };
+                            setDocuments(documentsCopy);
+                          }}
+                        />
+                      </form>
+                    ) : (
+                      <div className="px-3 py-2">{doc.title}</div>
+                    )}
                   </li>
                 )}
               </Draggable>
