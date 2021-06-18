@@ -64,21 +64,19 @@ const DocumentSidebar: FC<{
                     }}
                   >
                     {currentDocument === index ? (
-                      <form>
-                        <input
-                          className="bg-transparent px-3 py-2"
-                          type="text"
-                          value={doc.title}
-                          onChange={(e) => {
-                            const documentsCopy = [...documents];
-                            documentsCopy[index] = {
-                              ...documentsCopy[index],
-                              title: e.target.value,
-                            };
-                            setDocuments(documentsCopy);
-                          }}
-                        />
-                      </form>
+                      <input
+                        className="bg-transparent px-3 py-2"
+                        type="text"
+                        value={doc.title}
+                        onChange={(e) => {
+                          const documentsCopy = [...documents];
+                          documentsCopy[index] = {
+                            ...documentsCopy[index],
+                            title: e.target.value,
+                          };
+                          setDocuments(documentsCopy);
+                        }}
+                      />
                     ) : (
                       <div className="px-3 py-2">{doc.title}</div>
                     )}

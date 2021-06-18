@@ -1,7 +1,8 @@
 import ReactQuill, { Value } from "react-quill";
 import "quill/dist/quill.snow.css";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { DeltaOperation } from "quill";
+import { Format } from "../types/Types";
 
 const toolbar = [
   [{ header: [1, 2, false] }],
@@ -23,6 +24,7 @@ const TextEditor = ({
   onChange: (newValue: DeltaOperation[]) => any;
 }) => {
   const quill = useRef<ReactQuill>(null);
+  const [, setFormats] = useState<Format>({});
 
   return (
     <>
@@ -30,8 +32,8 @@ const TextEditor = ({
         theme="snow"
         value={{ ops: value } as Value}
         onChange={(_string, delta, source) => {
-          console.log(source, delta);
           if (source === "api") return;
+          console.log(source, delta);
           onChange(
             quill.current?.editor?.getContents().ops as DeltaOperation[]
           );
@@ -40,10 +42,18 @@ const TextEditor = ({
         modules={{
           toolbar,
         }}
-        /*  onChangeSelection={(selection, sources, editor) => {
-          setFormat(selection ? quill.current?.editor?.getFormat() : {});
-          console.log(selection, sources, editor);
-        }} */
+        onChangeSelection={(selection) => {
+          // TODO:fix #1 bug with multiple character selection
+          setFormats(
+            (selection
+              ? quill.current?.editor?.getFormat()
+              : {}) as unknown as Format
+          );
+          console.log(
+            "iwanttodie",
+            selection ? quill.current?.editor?.getFormat() : {}
+          );
+        }}
       />
     </>
   );
