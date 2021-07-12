@@ -1,6 +1,7 @@
 import { Dispatch, FC, SetStateAction, useState } from "react";
 import { LetterDocument } from "../types/Types";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { X } from "react-feather";
 
 const DocumentSidebar: FC<{
   documents: LetterDocument;
@@ -9,6 +10,21 @@ const DocumentSidebar: FC<{
   setCurrentDocument: Dispatch<SetStateAction<number>>;
 }> = ({ documents, setDocuments, currentDocument, setCurrentDocument }) => {
   const [newDocument, setNewDocument] = useState("");
+
+  const deleteDocument = (index = currentDocument) => {
+    const documentsCopy = [...documents];
+    documentsCopy.splice(index, 1);
+    setDocuments(documentsCopy);
+  };
+
+  const renameDocument = (newName: string, index = currentDocument) => {
+    const documentsCopy = [...documents];
+    documentsCopy[index] = {
+      ...documentsCopy[index],
+      title: newName,
+    };
+    setDocuments(documentsCopy);
+  };
 
   return (
     <DragDropContext
@@ -50,20 +66,26 @@ const DocumentSidebar: FC<{
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
-                    className={`cursor-pointer overflow-ellipsis overflow-hidden whitespace-nowrap text-sm h-auto w-full ${
+                    className={`cursor-pointer overflow-ellipsis overflow-hidden whitespace-nowrap text-sm h-auto w-full flex justify-between group px-3 py-2 ${
                       index === currentDocument
                         ? "bg-gray-100 hover:bg-gray-200"
                         : "bg-white hover:bg-gray-100"
                     }`}
                     onClick={() => {
-                      if (currentDocument === index) {
-                        // idk
-                      } else {
-                        setCurrentDocument(index);
-                      }
+                      if (currentDocument === index) return;
+                      setCurrentDocument(index);
+                    }}
+                    onDoubleClick={() => {
+                      if (currentDocument !== index) return;
+                      const newName = prompt(
+                        "Rename document",
+                        documents[currentDocument].title
+                      );
+                      if (!newName) return;
+                      renameDocument(newName);
                     }}
                   >
-                    {currentDocument === index ? (
+                    {/* {currentDocument === index ? (
                       <input
                         className="bg-transparent px-3 py-2"
                         type="text"
@@ -77,9 +99,19 @@ const DocumentSidebar: FC<{
                           setDocuments(documentsCopy);
                         }}
                       />
-                    ) : (
-                      <div className="px-3 py-2">{doc.title}</div>
-                    )}
+                    ) : ( */}
+                    <div>{doc.title}</div>
+                    <button
+                      className="opacity-0 group-hover:opacity-100 transition-opacity"
+                      onClick={() => {
+                        if (documents.length === 1) return;
+                        deleteDocument();
+                        setCurrentDocument(currentDocument - 1);
+                      }}
+                    >
+                      <X size="16" className="text-gray-400" />
+                    </button>
+                    {/* )} */}
                   </li>
                 )}
               </Draggable>
