@@ -4,8 +4,8 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { X } from "react-feather";
 
 const DocumentSidebar: FC<{
-  documents: LetterDocument;
-  setDocuments: Dispatch<SetStateAction<LetterDocument>>;
+  documents: LetterDocument[];
+  setDocuments: Dispatch<SetStateAction<LetterDocument[]>>;
   currentDocument: number;
   setCurrentDocument: Dispatch<SetStateAction<number>>;
 }> = ({ documents, setDocuments, currentDocument, setCurrentDocument }) => {
@@ -51,7 +51,7 @@ const DocumentSidebar: FC<{
       <Droppable droppableId="documents">
         {(provided) => (
           <ul
-            className="border-r border-gray-200 overflow-auto w-64"
+            className="border-r border-gray-200 overflow-auto w-64 p-2"
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
@@ -66,9 +66,9 @@ const DocumentSidebar: FC<{
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
-                    className={`cursor-pointer overflow-ellipsis overflow-hidden whitespace-nowrap text-sm h-auto w-full flex justify-between group px-3 py-2 ${
+                    className={`cursor-pointer overflow-ellipsis overflow-hidden whitespace-nowrap text-sm h-auto w-full flex justify-between group px-3 py-2 rounded-md mb-2 ${
                       index === currentDocument
-                        ? "bg-gray-100 hover:bg-gray-200"
+                        ? "bg-blue-500 text-white hover:bg-blue-400 font-bold"
                         : "bg-white hover:bg-gray-100"
                     }`}
                     onClick={() => {

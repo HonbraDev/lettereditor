@@ -16,4 +16,9 @@ export interface Format {
   align?: "left" | "center" | "right" | "justify";
 }
 
-export type LetterDocument = { title: string; value: DeltaOperation[] }[];
+export type LetterDocument = { title: string; value: DeltaOperation[] };
+
+export interface LetterFile {
+  title: string;
+  documents: LetterDocument[];
+}

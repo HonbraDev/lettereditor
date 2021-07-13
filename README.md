@@ -13,7 +13,7 @@
 
 ### Functional things
 
-- [ ] Fix the drag-and-drop documents
+- [x] Fix the drag-and-drop documents
 - [ ] Implement loading
 - [ ] Implement saving
 - [ ] Implement auto-saving

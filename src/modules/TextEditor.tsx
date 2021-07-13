@@ -1,8 +1,7 @@
 import ReactQuill, { Value } from "react-quill";
 import "quill/dist/quill.snow.css";
 import { useRef, useState } from "react";
-import { DeltaOperation } from "quill";
-import { Format } from "../types/Types";
+import { Format, LetterDocument } from "../types/Types";
 
 const toolbar = [
   [{ header: [1, 2, false] }],
@@ -20,8 +19,8 @@ const TextEditor = ({
   value,
   onChange,
 }: {
-  value: DeltaOperation[];
-  onChange: (newValue: DeltaOperation[]) => any;
+  value: LetterDocument["value"];
+  onChange: (newValue: LetterDocument["value"]) => any;
 }) => {
   const quill = useRef<ReactQuill>(null);
   const [, setFormats] = useState<Format>({});
@@ -35,7 +34,7 @@ const TextEditor = ({
           if (source === "api") return;
           console.log(source, delta);
           onChange(
-            quill.current?.editor?.getContents().ops as DeltaOperation[]
+            quill.current?.editor?.getContents().ops as LetterDocument["value"]
           );
         }}
         ref={quill}

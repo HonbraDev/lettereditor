@@ -1,0 +1,9 @@
+{
+  "title": "New document",
+  "documents": [
+    {
+      "title": "New document",
+      "value": [{ "insert": "Start typing here" }]
+    }
+  ]
+}
