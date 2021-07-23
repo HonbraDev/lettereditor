@@ -1,11 +1,9 @@
 import { useState } from "react";
-import "./App.css";
+import "./App.scss";
 import TextEditor from "./modules/TextEditor";
-import { LetterDocument, LetterFile } from "./types/Types";
+import { Format, LetterDocument, LetterFile } from "./types/Types";
 import DocumentSidebar from "./modules/DocumentSidebar";
-import Button from "./modules/Button";
-import { File } from "react-feather";
-import FileDropdown from "./modules/FileDropdown";
+import TopBar from "./modules/TopBar";
 
 const App = () => {
   const [currentDocument, setCurrentDocument] = useState(0);
@@ -16,6 +14,7 @@ const App = () => {
         title: "Hello",
         value: [
           { insert: "Hello, how are you? I am " },
+          { attributes: { header: 1 }, insert: "\n" },
           { attributes: { bold: true }, insert: "under the water" },
           { insert: ". Please " },
           { attributes: { italic: true }, insert: "help me" },
@@ -32,6 +31,7 @@ const App = () => {
       },
     ],
   });
+  const [formats, setFormats] = useState<Format>({});
 
   const onChange = (newValue: LetterDocument["value"]) => {
     const documentsCopy = [...letterFile.documents];
@@ -41,21 +41,7 @@ const App = () => {
 
   return (
     <div className="App absolute top-0 left-0 h-full w-full flex flex-col">
-      <div className="p-3 border-b border-gray-200 flex gap-4 items-center">
-        <FileDropdown
-          new={() =>
-            setLetterFile({
-              title: "New Document",
-              documents: [{ title: "New document", value: [] }],
-            })
-          }
-          open={() => {}}
-          save={() => {}}
-          about={() => alert("LetterEditor pre-alpha - Please don't use this")}
-        />
-        <h1 className="text-lg font-bold">Letter</h1>
-        {/* <Button color="secondary" size="small" icon={<File />} /> */}
-      </div>
+      <TopBar formats={formats} setFormats={setFormats} />
       <div className="w-full h-full flex">
         <DocumentSidebar
           documents={letterFile.documents}
@@ -67,6 +53,8 @@ const App = () => {
         <TextEditor
           value={letterFile.documents[currentDocument].value}
           onChange={onChange}
+          formats={formats}
+          setFormats={setFormats}
         />
       </div>
     </div>

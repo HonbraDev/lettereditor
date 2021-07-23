@@ -1,6 +1,6 @@
 import ReactQuill, { Value } from "react-quill";
 import "quill/dist/quill.snow.css";
-import { useRef, useState } from "react";
+import { Dispatch, FC, SetStateAction, useRef, useState } from "react";
 import { Format, LetterDocument } from "../types/Types";
 
 const toolbar = [
@@ -15,20 +15,18 @@ const toolbar = [
   ["clean"],
 ];
 
-const TextEditor = ({
-  value,
-  onChange,
-}: {
+const TextEditor: FC<{
   value: LetterDocument["value"];
   onChange: (newValue: LetterDocument["value"]) => any;
-}) => {
+  formats: Format;
+  setFormats: Dispatch<SetStateAction<Format>>;
+}> = ({ value, onChange, setFormats }) => {
   const quill = useRef<ReactQuill>(null);
-  const [, setFormats] = useState<Format>({});
 
   return (
     <>
       <ReactQuill
-        theme="snow"
+        theme=""
         value={{ ops: value } as Value}
         onChange={(_string, delta, source) => {
           if (source === "api") return;

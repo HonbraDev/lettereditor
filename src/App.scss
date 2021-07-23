@@ -1,0 +1,21 @@
+.quill {
+  @apply h-full w-full flex flex-col;
+
+  .ql-container {
+    border: none !important;
+    @apply overflow-y-auto h-full;
+
+    .ql-editor {
+      @apply prose prose-lg max-w-7xl;
+    }
+  }
+
+  .ql-toolbar {
+    display: none;
+  }
+}
+
+.ms-Pivot-link {
+  height: 32px !important;
+  min-width: 75px;
+}
