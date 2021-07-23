@@ -1,6 +1,6 @@
 import ReactQuill, { Value } from "react-quill";
 import "quill/dist/quill.snow.css";
-import { Dispatch, FC, SetStateAction, useRef, useState } from "react";
+import { Dispatch, FC, SetStateAction, useRef } from "react";
 import { Format, LetterDocument } from "../types/Types";
 
 const toolbar = [
