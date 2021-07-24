@@ -1,11 +1,12 @@
 import { Dispatch, FC, SetStateAction } from "react";
 import { Format } from "../types/Types";
-import { Pivot, DefaultButton, Dropdown } from "@fluentui/react";
+import { Pivot, DefaultButton, Dropdown, IconButton } from "@fluentui/react";
 import {
   TextBold24Regular,
   TextItalic24Regular,
   TextUnderline24Regular,
   TextStrikethrough24Regular,
+  TextColor24Regular,
 } from "@fluentui/react-icons";
 import PivotItem from "./PivotItem";
 import FormatButton from "./FormatButton";
@@ -46,6 +47,13 @@ const TopBar: FC<{
           icon={TextStrikethrough24Regular}
           active={formats.strike}
         />
+        <IconButton
+          style={{
+            color: formats.color ? formats.color : "gray",
+          }}
+        >
+          <TextColor24Regular />
+        </IconButton>
       </PivotItem>
       <PivotItem headerText="Tools">
         <DefaultButton>Search</DefaultButton>

@@ -8,7 +8,16 @@ const FormatButton: FC<
     active?: boolean;
   } & IButtonProps
 > = ({ icon: Icon, active, ...props }) => (
-  <IconButton style={{ color: active ? undefined : "gray" }} {...props}>
+  <IconButton
+    style={{
+      backgroundColor: active
+        ? "RGBA(128, 128, 128, 0.1)"
+        : "RGBA(128, 128, 128, 0)",
+      color: "gray",
+    }}
+    className="transition-colors"
+    {...props}
+  >
     <Icon />
   </IconButton>
 );
