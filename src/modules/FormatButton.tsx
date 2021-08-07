@@ -12,7 +12,7 @@ const FormatButton: FC<
     style={{
       backgroundColor: active
         ? "RGBA(128, 128, 128, 0.1)"
-        : "RGBA(128, 128, 128, 0)",
+        : "",
       color: "gray",
     }}
     className="transition-colors"

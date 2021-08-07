@@ -7,6 +7,20 @@ import {
   TextUnderline24Regular,
   TextStrikethrough24Regular,
   TextColor24Regular,
+  ColorBackground24Regular,
+  TextSubscript24Regular,
+  TextSuperscript24Regular,
+  TextQuote24Regular,
+  Code24Regular,
+  TextNumberListLtr24Regular,
+  TextBulletListLtr24Regular,
+  TextIndentDecrease24Regular,
+  TextIndentIncrease24Regular,
+  TextAlignLeft24Regular,
+  TextAlignRight24Regular,
+  TextAlignCenter24Regular,
+  TextAlignDistributed24Regular,
+  ClearFormatting24Regular,
 } from "@fluentui/react-icons";
 import PivotItem from "./PivotItem";
 import FormatButton from "./FormatButton";
@@ -18,42 +32,101 @@ const TopBar: FC<{
   <div className="transition-shadow px-4 bg-white border-b border-gray-200">
     <Pivot aria-label="Letter navbar">
       <PivotItem headerText="File">file</PivotItem>
-      <PivotItem headerText="Format">
-        <Dropdown
-          selectedKey={formats.header ? formats.header.toString() : "0"}
-          className="w-32"
-          options={[
-            {
-              key: "0",
-              text: "Normal",
-            },
-            {
-              key: "1",
-              text: "Header 1",
-            },
-            {
-              key: "2",
-              text: "Header 2",
-            },
-          ]}
-        />
-        <FormatButton icon={TextBold24Regular} active={formats.bold} />
-        <FormatButton icon={TextItalic24Regular} active={formats.italic} />
-        <FormatButton
-          icon={TextUnderline24Regular}
-          active={formats.underline}
-        />
-        <FormatButton
-          icon={TextStrikethrough24Regular}
-          active={formats.strike}
-        />
-        <IconButton
-          style={{
-            color: formats.color ? formats.color : "gray",
-          }}
-        >
-          <TextColor24Regular />
-        </IconButton>
+      <PivotItem headerText="Format" className="gap-4">
+        <div className="flex flex-row">
+          <Dropdown
+            selectedKey={formats.header ? formats.header.toString() : "0"}
+            className="w-32"
+            options={[
+              {
+                key: "0",
+                text: "Normal",
+              },
+              {
+                key: "1",
+                text: "Header 1",
+              },
+              {
+                key: "2",
+                text: "Header 2",
+              },
+            ]}
+          />
+        </div>
+        <div className="flex flex-row">
+          <FormatButton icon={TextBold24Regular} active={formats.bold} />
+          <FormatButton icon={TextItalic24Regular} active={formats.italic} />
+          <FormatButton
+            icon={TextUnderline24Regular}
+            active={formats.underline}
+          />
+          <FormatButton
+            icon={TextStrikethrough24Regular}
+            active={formats.strike}
+          />
+        </div>
+        <div className="flex flex-row">
+          <IconButton
+            style={{
+              color: formats.color ? formats.color : "gray",
+            }}
+          >
+            <TextColor24Regular />
+          </IconButton>
+          <IconButton
+            style={{
+              color: formats.background ? formats.background : "gray",
+            }}
+          >
+            <ColorBackground24Regular />
+          </IconButton>
+        </div>
+        <div className="flex flex-row">
+          <FormatButton
+            icon={TextSubscript24Regular}
+            active={formats.script === "sub"}
+          />
+          <FormatButton
+            icon={TextSuperscript24Regular}
+            active={formats.script === "super"}
+          />
+        </div>
+        <div className="flex flex-row">
+          <FormatButton icon={TextQuote24Regular} active={formats.blockquote} />
+          <FormatButton icon={Code24Regular} active={formats.code} />
+        </div>
+        <div className="flex flex-row">
+          <FormatButton
+            icon={TextNumberListLtr24Regular}
+            active={formats.list === "ordered"}
+          />
+          <FormatButton
+            icon={TextBulletListLtr24Regular}
+            active={formats.list === "bullet"}
+          />
+          <FormatButton icon={TextIndentDecrease24Regular} active={false} />
+          <FormatButton icon={TextIndentIncrease24Regular} active={false} />
+        </div>
+        <div className="flex flex-row">
+          <FormatButton
+            icon={(() => {
+              switch (formats.align) {
+                case "right":
+                  return TextAlignRight24Regular;
+                case "center":
+                  return TextAlignCenter24Regular;
+                case "justify":
+                  return TextAlignDistributed24Regular;
+                default:
+                  return TextAlignLeft24Regular;
+              }
+            })()}
+            active={false}
+          />
+        </div>
+        <div className="flex flex-row">
+          <FormatButton icon={ClearFormatting24Regular} active={false} />
+        </div>
       </PivotItem>
       <PivotItem headerText="Tools">
         <DefaultButton>Search</DefaultButton>
