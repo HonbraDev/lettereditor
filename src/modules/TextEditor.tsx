@@ -1,6 +1,6 @@
 import ReactQuill, { Value } from "react-quill";
 import "quill/dist/quill.snow.css";
-import { Dispatch, FC, SetStateAction, useRef } from "react";
+import { Dispatch, FC, RefObject, SetStateAction } from "react";
 import { Format, LetterDocument } from "../types/Types";
 
 const toolbar = [
@@ -20,9 +20,8 @@ const TextEditor: FC<{
   onChange: (newValue: LetterDocument["value"]) => any;
   formats: Format;
   setFormats: Dispatch<SetStateAction<Format>>;
-}> = ({ value, onChange, setFormats }) => {
-  const quill = useRef<ReactQuill>(null);
-
+  quill: RefObject<ReactQuill>;
+}> = ({ value, onChange, setFormats, quill }) => {
   return (
     <>
       <ReactQuill
@@ -30,7 +29,6 @@ const TextEditor: FC<{
         value={{ ops: value } as Value}
         onChange={(_string, delta, source) => {
           if (source === "api") return;
-          console.log(source, delta);
           onChange(
             quill.current?.editor?.getContents().ops as LetterDocument["value"]
           );
@@ -45,10 +43,6 @@ const TextEditor: FC<{
             (selection
               ? quill.current?.editor?.getFormat()
               : {}) as unknown as Format
-          );
-          console.log(
-            "iwanttodie",
-            selection ? quill.current?.editor?.getFormat() : {}
           );
         }}
       />

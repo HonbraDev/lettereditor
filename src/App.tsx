@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./App.scss";
 import TextEditor from "./modules/TextEditor";
 import { Format, LetterDocument, LetterFile } from "./types/Types";
 import DocumentSidebar from "./modules/DocumentSidebar";
 import TopBar from "./modules/TopBar";
+import ReactQuill from "react-quill";
 
 const App = () => {
+  const quill = useRef<ReactQuill>(null);
+
   const [currentDocument, setCurrentDocument] = useState(0);
   const [letterFile, setLetterFile] = useState<LetterFile>({
     title: "Hello Letter",
@@ -42,7 +45,7 @@ const App = () => {
 
   return (
     <div className="App absolute top-0 left-0 h-full w-full flex flex-col">
-      <TopBar formats={formats} setFormats={setFormats} />
+      <TopBar formats={formats} quill={quill} />
       <div className="w-full h-full flex">
         <DocumentSidebar
           documents={letterFile.documents}
@@ -56,6 +59,7 @@ const App = () => {
           onChange={onChange}
           formats={formats}
           setFormats={setFormats}
+          quill={quill}
         />
       </div>
     </div>
