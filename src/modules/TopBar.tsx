@@ -1,6 +1,6 @@
 import { FC, RefObject } from "react";
 import { Format } from "../types/Types";
-import { Pivot, DefaultButton, Dropdown, IconButton } from "@fluentui/react";
+import { Pivot, DefaultButton, Dropdown, IconButton, PivotItem } from "@fluentui/react";
 import {
   TextBold24Regular,
   TextItalic24Regular,
@@ -22,7 +22,6 @@ import {
   TextAlignDistributed24Regular,
   ClearFormatting24Regular,
 } from "@fluentui/react-icons";
-import PivotItem from "./PivotItem";
 import FormatButton from "./FormatButton";
 import ReactQuill from "react-quill";
 
@@ -45,8 +44,8 @@ const TopBar: FC<{
   return (
     <div className="transition-shadow px-4 bg-white border-b border-gray-200">
       <Pivot aria-label="Letter navbar">
-        <PivotItem headerText="File">file</PivotItem>
-        <PivotItem headerText="Format" className="gap-4">
+        <PivotItem headerText="File" className="h-12 flex items-center gap-1 px-4">file</PivotItem>
+        <PivotItem headerText="Format" className="gap-4 h-12 flex items-center px-4">
           <div className="flex flex-row">
             <Dropdown
               selectedKey={formats.header ? formats.header.toString() : "0"}
@@ -165,7 +164,7 @@ const TopBar: FC<{
             />
           </div>
         </PivotItem>
-        <PivotItem headerText="Tools">
+        <PivotItem headerText="Tools" className="h-12 flex items-center gap-1 px-4">
           <DefaultButton>Search</DefaultButton>
         </PivotItem>
       </Pivot>
