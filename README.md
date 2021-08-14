@@ -13,16 +13,15 @@
 
 ### Functional things
 
-- [x] Fix the drag-and-drop documents
+- [ ] Implement document sidebar in FluentUI
 - [ ] Implement loading
 - [ ] Implement saving
 - [ ] Implement auto-saving
 - [ ] Implement custom formatting buttons
-  - Fixes Quill icons not showing in prod
+  - Mostly done, need to implement the non-boolean buttons
 - [ ] Focus editor on document creation / switch
 - [x] Implement document deletion
   - [ ] Impelement an undo snackbar
-- [ ] Implement inline document name editing
 
 ### Code quality
 
