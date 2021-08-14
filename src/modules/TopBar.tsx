@@ -27,7 +27,6 @@ import {
   TextAlignCenter24Regular,
   TextAlignDistributed24Regular,
   ClearFormatting24Regular,
-  FolderOpen16Regular,
 } from "@fluentui/react-icons";
 import FormatButton from "./FormatButton";
 import ReactQuill from "react-quill";
