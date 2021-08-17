@@ -18,6 +18,7 @@
 - [ ] Implement saving
 - [ ] Implement auto-saving
 - [ ] Implement custom formatting buttons
+  - [x] Fix bug where the highlighted formats don't update until you change selection
   - Mostly done, need to implement the non-boolean buttons
 - [ ] Focus editor on document creation / switch
 - [x] Implement document deletion

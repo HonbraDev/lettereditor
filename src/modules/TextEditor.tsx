@@ -1,4 +1,4 @@
-import ReactQuill, { Value } from "react-quill";
+import ReactQuill, { Range, Value } from "react-quill";
 import "quill/dist/quill.snow.css";
 import { Dispatch, FC, RefObject, SetStateAction } from "react";
 import { Format, LetterDocument } from "../types/Types";
@@ -22,12 +22,21 @@ const TextEditor: FC<{
   setFormats: Dispatch<SetStateAction<Format>>;
   quill: RefObject<ReactQuill>;
 }> = ({ value, onChange, setFormats, quill }) => {
+  const onChangeSelection = (selection: Range) => {
+    // TODO: fix bug with multiple character selection
+    //
+    // /\ tbh idk what that even is and _I_ wrote the code
+    setFormats(
+      (selection ? quill.current?.editor?.getFormat() : {}) as unknown as Format
+    );
+  };
   return (
     <>
       <ReactQuill
         theme=""
         value={{ ops: value } as Value}
-        onChange={(_string, delta, source) => {
+        onChange={(_, __, source) => {
+          onChangeSelection(quill.current?.editor?.getSelection() as Range);
           if (source === "api") return;
           onChange(
             quill.current?.editor?.getContents().ops as LetterDocument["value"]
@@ -37,14 +46,7 @@ const TextEditor: FC<{
         modules={{
           toolbar,
         }}
-        onChangeSelection={(selection) => {
-          // TODO:fix #1 bug with multiple character selection
-          setFormats(
-            (selection
-              ? quill.current?.editor?.getFormat()
-              : {}) as unknown as Format
-          );
-        }}
+        onChangeSelection={onChangeSelection}
       />
     </>
   );

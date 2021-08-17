@@ -98,7 +98,9 @@ const TopBar: FC<{
                   text: "Header 2",
                 },
               ]}
-              onChange={console.log}
+              onChange={(_, item) => {
+                setFormat("header", parseInt(item!.key as string));
+              }}
             />
           </div>
           <div className="flex flex-row">
