@@ -1,4 +1,4 @@
-import { FC, RefObject } from "react";
+import { FC, RefObject, useCallback } from "react";
 import { Format } from "../types/Types";
 import {
   Pivot,
@@ -30,11 +30,39 @@ import {
 } from "@fluentui/react-icons";
 import FormatButton from "./FormatButton";
 import ReactQuill from "react-quill";
+import { useDropzone } from "react-dropzone";
 
 const TopBar: FC<{
   formats: Format;
   quill: RefObject<ReactQuill>;
 }> = ({ formats, quill }) => {
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    if (!acceptedFiles[0]) return;
+
+    try {
+      const reader = new FileReader();
+
+      reader.onabort = () => {
+        throw new Error("Reading was aborted");
+      };
+      reader.onerror = () => {
+        throw new Error("Cannot read file");
+      };
+      reader.onload = () => {
+        try {
+          const parsed = JSON.parse(reader.result as string);
+        } catch (e) {
+          throw new Error("Invalid or corrupted file");
+        }
+      };
+      reader.readAsArrayBuffer(acceptedFiles[0]);
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
+
+  const { open, getRootProps, getInputProps } = useDropzone({ onDrop });
+
   const clearFormats = () => {
     const selection = quill.current?.getEditor().getSelection();
     quill.current
@@ -52,22 +80,21 @@ const TopBar: FC<{
       <Pivot aria-label="Letter navbar">
         <PivotItem
           headerText="File"
-          className="h-12 flex items-center gap-2 px-4"
+          className="h-12 flex items-center gap-2 px-4 justify-center"
+          itemKey="file"
         >
-          <DefaultButton
-            iconProps={{
-              iconName: "star",
-            }}
-          >
-            New
-          </DefaultButton>
-          <DefaultButton
-            iconProps={{
-              iconName: "folderopen",
-            }}
-          >
-            Open
-          </DefaultButton>
+          <span {...getRootProps()}>
+            <input {...getInputProps()} />
+            <DefaultButton
+              onClick={open}
+              iconProps={{
+                iconName: "folderopen",
+              }}
+            >
+              Open
+            </DefaultButton>
+          </span>
+
           <DefaultButton
             iconProps={{
               iconName: "save",
@@ -78,7 +105,8 @@ const TopBar: FC<{
         </PivotItem>
         <PivotItem
           headerText="Format"
-          className="gap-4 h-12 flex items-center px-4"
+          className="gap-4 h-12 flex items-center px-4 justify-center"
+          itemKey="format"
         >
           <div className="flex flex-row">
             <Dropdown
@@ -86,16 +114,16 @@ const TopBar: FC<{
               className="w-32"
               options={[
                 {
-                  key: "0",
-                  text: "Normal",
-                },
-                {
                   key: "1",
                   text: "Header 1",
                 },
                 {
                   key: "2",
                   text: "Header 2",
+                },
+                {
+                  key: "0",
+                  text: "Normal",
                 },
               ]}
               onChange={(_, item) => {
@@ -202,7 +230,8 @@ const TopBar: FC<{
         </PivotItem>
         <PivotItem
           headerText="Tools"
-          className="h-12 flex items-center gap-1 px-4"
+          className="h-12 flex items-center gap-1 px-4 justify-center"
+          itemKey="tools"
         >
           <DefaultButton>Search</DefaultButton>
         </PivotItem>

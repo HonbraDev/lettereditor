@@ -35,6 +35,7 @@ const App = () => {
       },
     ],
   });
+
   const [formats, setFormats] = useState<Format>({});
 
   const onChange = (newValue: LetterDocument["value"]) => {
@@ -43,14 +44,32 @@ const App = () => {
     setLetterFile((lf) => ({ ...lf, documents: documentsCopy }));
   };
 
+  /* if (!letterFile.documents[currentDocument]) {
+    if (letterFile.documents.length < 1)
+      setLetterFile({
+        ...letterFile,
+        documents: [
+          {
+            title: "",
+            value: [],
+          },
+        ],
+      });
+
+    setCurrentDocument(0);
+    return <></>;
+  } */
+
   return (
     <div className="App absolute top-0 left-0 h-full w-full flex flex-col">
       <TopBar formats={formats} quill={quill} />
-      <div className="w-full h-full flex">
+      <div className="w-full h-full flex justify-center">
         <DocumentSidebar
           documents={letterFile.documents}
-          setDocuments={() => (nd: LetterFile["documents"]) =>
-            setLetterFile((lf) => ({ ...lf, documents: nd }))}
+          setDocuments={(nd: LetterFile["documents"]) => {
+            console.log("Updating documents");
+            setLetterFile((lf) => ({ ...lf, documents: nd }));
+          }}
           currentDocument={currentDocument}
           setCurrentDocument={setCurrentDocument}
         />

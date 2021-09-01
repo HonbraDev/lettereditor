@@ -1,12 +1,12 @@
 .quill {
-  @apply h-full w-full flex flex-col;
+  @apply w-full max-w-5xl h-full flex flex-col;
 
   .ql-container {
     border: none !important;
-    @apply overflow-y-auto h-full;
+    @apply overflow-y-auto h-full w-full;
 
     .ql-editor {
-      @apply max-w-7xl prose;
+      @apply prose w-full max-w-5xl;
     }
   }
 

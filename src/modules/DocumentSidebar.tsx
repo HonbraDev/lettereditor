@@ -5,10 +5,18 @@ import { X } from "react-feather";
 
 const DocumentSidebar: FC<{
   documents: LetterDocument[];
-  setDocuments: Dispatch<SetStateAction<LetterDocument[]>>;
+  setDocuments: (nd: LetterDocument[]) => any;
   currentDocument: number;
   setCurrentDocument: Dispatch<SetStateAction<number>>;
 }> = ({ documents, setDocuments, currentDocument, setCurrentDocument }) => {
+  console.log(
+    "DocumentSidebar re-rendered",
+    documents,
+    setDocuments,
+    currentDocument,
+    setCurrentDocument
+  );
+
   const [newDocument, setNewDocument] = useState("");
 
   const deleteDocument = (index = currentDocument) => {
@@ -18,6 +26,7 @@ const DocumentSidebar: FC<{
   };
 
   const renameDocument = (newName: string, index = currentDocument) => {
+    console.log("Renaming document");
     const documentsCopy = [...documents];
     documentsCopy[index] = {
       ...documentsCopy[index],
@@ -51,7 +60,7 @@ const DocumentSidebar: FC<{
       <Droppable droppableId="documents">
         {(provided) => (
           <ul
-            className="border-r border-gray-200 overflow-auto w-64"
+            className=" overflow-auto w-64"
             ref={provided.innerRef}
             {...provided.droppableProps}
           >

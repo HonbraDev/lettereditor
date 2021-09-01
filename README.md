@@ -13,16 +13,20 @@
 
 ### Functional things
 
+- [x] Fix infinite recursion when switching documents
+- [ ] Fix document rearrangement
 - [ ] Implement document sidebar in FluentUI
 - [ ] Implement loading
 - [ ] Implement saving
 - [ ] Implement auto-saving
 - [ ] Implement custom formatting buttons
-  - [x] Fix bug where the highlighted formats don't update until you change selection
   - Mostly done, need to implement the non-boolean buttons
+  - [ ] Fix bug where the highlighted formats don't update until you change selection
+    - [ ] Fix bug where the program shits itself when you fix ↑
 - [ ] Focus editor on document creation / switch
 - [x] Implement document deletion
   - [ ] Impelement an undo snackbar
+- [ ] Implement search
 
 ### Code quality
 
