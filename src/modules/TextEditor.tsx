@@ -2,7 +2,7 @@ import ReactQuill, { Range, Value } from "react-quill";
 import "quill/dist/quill.snow.css";
 import { Dispatch, FC, RefObject, SetStateAction } from "react";
 import { Format, LetterDocument } from "../types/Types";
-import { Sources } from "quill";
+// import { Sources } from "quill";
 
 const toolbar: any[] = [
   /* [{ header: [1, 2, false] }],

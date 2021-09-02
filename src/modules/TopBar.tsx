@@ -37,31 +37,34 @@ const TopBar: FC<{
   quill: RefObject<ReactQuill>;
   setLetterFile: Dispatch<SetStateAction<LetterFile>>;
 }> = ({ formats, quill, setLetterFile }) => {
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    if (!acceptedFiles[0]) return;
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      if (!acceptedFiles[0]) return;
 
-    try {
-      const reader = new FileReader();
+      try {
+        const reader = new FileReader();
 
-      reader.onabort = () => {
-        throw new Error("Reading was aborted");
-      };
-      reader.onerror = () => {
-        throw new Error("Cannot read file");
-      };
-      reader.onload = () => {
-        try {
-          const parsed = JSON.parse(reader.result as string);
-          setLetterFile(parsed);
-        } catch (e) {
-          alert("Invalid or corrupted file");
-        }
-      };
-      reader.readAsText(acceptedFiles[0]);
-    } catch (e) {
-      console.error(e);
-    }
-  }, []);
+        reader.onabort = () => {
+          throw new Error("Reading was aborted");
+        };
+        reader.onerror = () => {
+          throw new Error("Cannot read file");
+        };
+        reader.onload = () => {
+          try {
+            const parsed = JSON.parse(reader.result as string);
+            setLetterFile(parsed);
+          } catch (e) {
+            alert("Invalid or corrupted file");
+          }
+        };
+        reader.readAsText(acceptedFiles[0]);
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    [setLetterFile]
+  );
 
   const { open, getRootProps, getInputProps } = useDropzone({ onDrop });
 
