@@ -62,7 +62,7 @@ const App = () => {
 
   return (
     <div className="App absolute top-0 left-0 h-full w-full flex flex-col">
-      <TopBar formats={formats} quill={quill} />
+      <TopBar formats={formats} quill={quill} setLetterFile={setLetterFile} />
       <div className="w-full h-full flex justify-center">
         <DocumentSidebar
           documents={letterFile.documents}

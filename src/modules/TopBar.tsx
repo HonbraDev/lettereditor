@@ -1,5 +1,5 @@
-import { FC, RefObject, useCallback } from "react";
-import { Format } from "../types/Types";
+import { Dispatch, FC, RefObject, SetStateAction, useCallback } from "react";
+import { Format, LetterFile } from "../types/Types";
 import {
   Pivot,
   DefaultButton,
@@ -35,7 +35,8 @@ import { useDropzone } from "react-dropzone";
 const TopBar: FC<{
   formats: Format;
   quill: RefObject<ReactQuill>;
-}> = ({ formats, quill }) => {
+  setLetterFile: Dispatch<SetStateAction<LetterFile>>;
+}> = ({ formats, quill, setLetterFile }) => {
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (!acceptedFiles[0]) return;
 
@@ -51,11 +52,12 @@ const TopBar: FC<{
       reader.onload = () => {
         try {
           const parsed = JSON.parse(reader.result as string);
+          setLetterFile(parsed);
         } catch (e) {
-          throw new Error("Invalid or corrupted file");
+          alert("Invalid or corrupted file");
         }
       };
-      reader.readAsArrayBuffer(acceptedFiles[0]);
+      reader.readAsText(acceptedFiles[0]);
     } catch (e) {
       console.error(e);
     }
