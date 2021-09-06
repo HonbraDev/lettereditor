@@ -44,26 +44,10 @@ const App = () => {
     setLetterFile((lf) => ({ ...lf, documents: documentsCopy }));
   };
 
-  /* if (!letterFile.documents[currentDocument]) {
-    if (letterFile.documents.length < 1)
-      setLetterFile({
-        ...letterFile,
-        documents: [
-          {
-            title: "",
-            value: [],
-          },
-        ],
-      });
-
-    setCurrentDocument(0);
-    return <></>;
-  } */
-
   return (
     <div className="App absolute top-0 left-0 h-full w-full flex flex-col">
       <TopBar formats={formats} quill={quill} setLetterFile={setLetterFile} />
-      <div className="w-full h-full flex justify-center">
+      <div className="w-full flex justify-center flex-1 overflow-auto">
         <DocumentSidebar
           documents={letterFile.documents}
           setDocuments={(nd: LetterFile["documents"]) => {

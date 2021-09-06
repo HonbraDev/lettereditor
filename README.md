@@ -14,9 +14,8 @@
 ### Functional things
 
 - [x] Fix infinite recursion when switching documents
-- [ ] Fix document rearrangement
+- [x] Fix document rearrangement
 - [ ] Implement document sidebar in FluentUI
-- [ ] Implement loading
 - [ ] Implement saving
 - [ ] Implement auto-saving
 - [ ] Implement custom formatting buttons

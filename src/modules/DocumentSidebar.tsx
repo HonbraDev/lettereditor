@@ -94,28 +94,17 @@ const DocumentSidebar: FC<{
                       renameDocument(newName);
                     }}
                   >
-                    {/* {currentDocument === index ? (
-                      <input
-                        className="bg-transparent px-3 py-2"
-                        type="text"
-                        value={doc.title}
-                        onChange={(e) => {
-                          const documentsCopy = [...documents];
-                          documentsCopy[index] = {
-                            ...documentsCopy[index],
-                            title: e.target.value,
-                          };
-                          setDocuments(documentsCopy);
-                        }}
-                      />
-                    ) : ( */}
                     <div>{doc.title}</div>
                     <button
                       className="opacity-0 group-hover:opacity-100 transition-opacity"
+                      style={{
+                        visibility: documents.length > 1 ? "visible" : "hidden",
+                      }}
                       onClick={() => {
                         if (documents.length === 1) return;
                         deleteDocument();
-                        setCurrentDocument(currentDocument - 1);
+                        if (currentDocument === documents.length - 1)
+                          setCurrentDocument(currentDocument - 1);
                       }}
                     >
                       <X size="16" className="text-gray-400" />
