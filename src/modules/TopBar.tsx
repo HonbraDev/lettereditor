@@ -29,14 +29,23 @@ import {
   ClearFormatting24Regular,
 } from "@fluentui/react-icons";
 import FormatButton from "./FormatButton";
-import ReactQuill from "react-quill";
+import type ReactQuill from "react-quill";
 import { useDropzone } from "react-dropzone";
+import { useBoolean, useId } from "@fluentui/react-hooks";
+import ColorCallout from "./ColorCallout";
 
 const TopBar: FC<{
   formats: Format;
   quill: RefObject<ReactQuill>;
   setLetterFile: Dispatch<SetStateAction<LetterFile>>;
 }> = ({ formats, quill, setLetterFile }) => {
+  const textColorId = useId("textcolor");
+  const backgroundColorId = useId("textcolor");
+
+  const [textColorExpanded, { toggle: toggleTextColor }] = useBoolean(false);
+  const [backgroundColorExpanded, { toggle: toggleBackgroundColor }] =
+    useBoolean(false);
+
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       if (!acceptedFiles[0]) return;
@@ -160,6 +169,8 @@ const TopBar: FC<{
           </div>
           <div className="flex flex-row">
             <IconButton
+              id={textColorId}
+              onClick={toggleTextColor}
               style={{
                 color: formats.color ? formats.color : "gray",
               }}
@@ -167,6 +178,8 @@ const TopBar: FC<{
               <TextColor24Regular />
             </IconButton>
             <IconButton
+              id={backgroundColorId}
+              onClick={toggleBackgroundColor}
               style={{
                 color: formats.background ? formats.background : "gray",
               }}
@@ -241,6 +254,21 @@ const TopBar: FC<{
           <DefaultButton>Search</DefaultButton>
         </PivotItem>
       </Pivot>
+      <ColorCallout
+        active={textColorExpanded}
+        toggle={toggleTextColor}
+        onColorChange={(color) => setFormat("color", color)}
+        selectedColor={formats.color}
+        anchorId={textColorId}
+      />
+      <ColorCallout
+        active={backgroundColorExpanded}
+        toggle={toggleBackgroundColor}
+        onColorChange={(color) => setFormat("background", color)}
+        selectedColor={formats.background}
+        anchorId={backgroundColorId}
+        background={true}
+      />
     </div>
   );
 };

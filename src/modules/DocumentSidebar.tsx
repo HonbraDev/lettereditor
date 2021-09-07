@@ -1,7 +1,7 @@
 import { Dispatch, FC, SetStateAction, useState } from "react";
 import { LetterDocument } from "../types/Types";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { X } from "react-feather";
+import { Dismiss12Regular } from "@fluentui/react-icons";
 
 const DocumentSidebar: FC<{
   documents: LetterDocument[];
@@ -9,14 +9,6 @@ const DocumentSidebar: FC<{
   currentDocument: number;
   setCurrentDocument: Dispatch<SetStateAction<number>>;
 }> = ({ documents, setDocuments, currentDocument, setCurrentDocument }) => {
-  console.log(
-    "DocumentSidebar re-rendered",
-    documents,
-    setDocuments,
-    currentDocument,
-    setCurrentDocument
-  );
-
   const [newDocument, setNewDocument] = useState("");
 
   const deleteDocument = (index = currentDocument) => {
@@ -107,9 +99,9 @@ const DocumentSidebar: FC<{
                           setCurrentDocument(currentDocument - 1);
                       }}
                     >
-                      <X size="16" className="text-gray-400" />
+                      {/* <X size="16" className="text-gray-400" /> */}
+                      <Dismiss12Regular className="text-base text-gray-400" />
                     </button>
-                    {/* )} */}
                   </li>
                 )}
               </Draggable>
