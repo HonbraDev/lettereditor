@@ -18,7 +18,7 @@
 - [ ] Implement document sidebar in FluentUI
 - [ ] Implement saving
 - [ ] Implement auto-saving
-- [ ] Implement custom formatting buttons
+- [x] Implement custom formatting buttons
   - Mostly done, need to implement the non-boolean buttons
   - [ ] Fix bug where the highlighted formats don't update until you change selection
     - [ ] Fix bug where the program shits itself when you fix ↑
