@@ -1,4 +1,4 @@
-import { Dispatch, FC, RefObject, SetStateAction, useCallback } from "react";
+import { Dispatch, FC, RefObject, useCallback } from "react";
 import { Format, LetterFile } from "../types/Types";
 import {
   Pivot,
@@ -37,7 +37,7 @@ import ColorCallout from "./ColorCallout";
 const TopBar: FC<{
   formats: Format;
   quill: RefObject<ReactQuill>;
-  setLetterFile: Dispatch<SetStateAction<LetterFile>>;
+  setLetterFile: Dispatch<LetterFile>;
 }> = ({ formats, quill, setLetterFile }) => {
   const textColorId = useId("textcolor");
   const backgroundColorId = useId("textcolor");
@@ -53,9 +53,6 @@ const TopBar: FC<{
       try {
         const reader = new FileReader();
 
-        reader.onabort = () => {
-          throw new Error("Reading was aborted");
-        };
         reader.onerror = () => {
           throw new Error("Cannot read file");
         };
@@ -97,6 +94,30 @@ const TopBar: FC<{
           className="h-12 flex items-center gap-2 px-4 justify-center"
           itemKey="file"
         >
+          <DefaultButton
+            iconProps={{
+              iconName: "new",
+            }}
+            onClick={() => {
+              if (
+                window.confirm(
+                  "Unsaved changes will be lost. Do you want to continue?"
+                )
+              )
+                setLetterFile({
+                  title: "New document",
+                  documents: [
+                    {
+                      title: "New document",
+                      value: [{ insert: "Enter text here" }],
+                    },
+                  ],
+                });
+            }}
+          >
+            New
+          </DefaultButton>
+
           <span {...getRootProps()}>
             <input {...getInputProps()} />
             <DefaultButton
