@@ -50,6 +50,7 @@ const TextEditor: FC<{
           toolbar,
         }}
         onChangeSelection={onChangeSelection}
+        placeholder="Enter text here..."
       />
     </>
   );

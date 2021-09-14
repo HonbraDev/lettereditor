@@ -6,6 +6,7 @@ import {
   Dropdown,
   IconButton,
   PivotItem,
+  TextField,
 } from "@fluentui/react";
 import {
   TextBold24Regular,
@@ -106,6 +107,7 @@ const TopBar: FC<{
           className="h-12 flex items-center gap-2 px-4 justify-center"
           itemKey="file"
         >
+          <TextField value={letterFile.title} />
           <DefaultButton
             iconProps={{
               iconName: "new",
@@ -117,11 +119,11 @@ const TopBar: FC<{
                 )
               )
                 setLetterFile({
-                  title: "New document",
+                  title: "A document",
                   documents: [
                     {
                       title: "New document",
-                      value: [{ insert: "Enter text here" }],
+                      value: [],
                     },
                   ],
                 });
