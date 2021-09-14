@@ -99,7 +99,6 @@ const DocumentSidebar: FC<{
                           setCurrentDocument(currentDocument - 1);
                       }}
                     >
-                      {/* <X size="16" className="text-gray-400" /> */}
                       <Dismiss12Regular className="text-base text-gray-400" />
                     </button>
                   </li>
@@ -110,6 +109,7 @@ const DocumentSidebar: FC<{
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                if (!newDocument) return;
                 const documentsCopy = [...documents];
                 documentsCopy.push({
                   title: newDocument,

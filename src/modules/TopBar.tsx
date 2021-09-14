@@ -37,8 +37,9 @@ import ColorCallout from "./ColorCallout";
 const TopBar: FC<{
   formats: Format;
   quill: RefObject<ReactQuill>;
+  letterFile: LetterFile;
   setLetterFile: Dispatch<LetterFile>;
-}> = ({ formats, quill, setLetterFile }) => {
+}> = ({ formats, quill, letterFile, setLetterFile }) => {
   const textColorId = useId("textcolor");
   const backgroundColorId = useId("textcolor");
 
@@ -73,6 +74,17 @@ const TopBar: FC<{
   );
 
   const { open, getRootProps, getInputProps } = useDropzone({ onDrop });
+
+  const save = () => {
+    const content = JSON.stringify(letterFile);
+    const blob = new Blob([content], { type: "application/octet-stream" });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `${letterFile.title}.ltr`;
+    link.click();
+    link.remove();
+  };
 
   const clearFormats = () => {
     const selection = quill.current?.getEditor().getSelection();
@@ -131,6 +143,7 @@ const TopBar: FC<{
           </span>
 
           <DefaultButton
+            onClick={save}
             iconProps={{
               iconName: "save",
             }}

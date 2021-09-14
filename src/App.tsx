@@ -58,7 +58,12 @@ const App = () => {
 
   return (
     <div className="App absolute top-0 left-0 h-full w-full flex flex-col">
-      <TopBar formats={formats} quill={quill} setLetterFile={setLetterFile} />
+      <TopBar
+        formats={formats}
+        quill={quill}
+        letterFile={letterFile}
+        setLetterFile={setLetterFile}
+      />
       <div className="w-full flex justify-center flex-1 overflow-auto">
         <DocumentSidebar
           documents={letterFile.documents}
