@@ -107,7 +107,15 @@ const TopBar: FC<{
           className="h-12 flex items-center gap-2 px-4 justify-center"
           itemKey="file"
         >
-          <TextField value={letterFile.title} />
+          <TextField
+            value={letterFile.title}
+            onChange={(e) => {
+              setLetterFile({
+                ...letterFile,
+                title: (e.target as HTMLInputElement).value,
+              });
+            }}
+          />
           <DefaultButton
             iconProps={{
               iconName: "new",
