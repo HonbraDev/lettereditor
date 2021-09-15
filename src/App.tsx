@@ -14,27 +14,11 @@ const App = () => {
   const [letterFileStringified, setLetterFileStringified] = useLocalStorage(
     "letterFile",
     JSON.stringify({
-      title: "Hello Letter",
+      title: "A document",
       documents: [
         {
-          title: "Hello",
-          value: [
-            { insert: "Hello, how are you? I am " },
-            { attributes: { bold: true }, insert: "under the water" },
-            { insert: ". Please " },
-            { attributes: { italic: true }, insert: "help me" },
-            { insert: ", there’s " },
-            { attributes: { underline: true }, insert: "too much" },
-            { insert: " raining!" },
-            { attributes: { header: 1 }, insert: "\n" },
-            { insert: " Woo!" },
-            { attributes: { blockquote: true }, insert: "\n" },
-            { insert: "\n" },
-          ],
-        },
-        {
-          title: "How are you",
-          value: [{ insert: "How are you" }],
+          title: "New document",
+          value: [],
         },
       ],
     })
