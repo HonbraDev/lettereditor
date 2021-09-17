@@ -7,6 +7,7 @@ import {
   IconButton,
   PivotItem,
   TextField,
+  Link,
 } from "@fluentui/react";
 import {
   TextBold24Regular,
@@ -118,7 +119,7 @@ const TopBar: FC<{
           />
           <DefaultButton
             iconProps={{
-              iconName: "new",
+              iconName: "circleplus",
             }}
             onClick={() => {
               if (
@@ -291,11 +292,14 @@ const TopBar: FC<{
           </div>
         </PivotItem>
         <PivotItem
-          headerText="Tools"
+          headerText="About"
           className="h-12 flex items-center gap-1 px-4 justify-center"
-          itemKey="tools"
+          itemKey="about"
         >
-          <DefaultButton>Search</DefaultButton>
+          <Link href="https://github.com/honbradev/lettereditor">
+            LetterEditor
+          </Link>{" "}
+          by <Link href="https://github.com/honbradev">HonbraDev</Link>
         </PivotItem>
       </Pivot>
       <ColorCallout
